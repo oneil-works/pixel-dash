@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pixel Dash DX</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="crt"></div>
+
+  <div id="gameShell">
+    <canvas id="game" width="960" height="540"></canvas>
+
+    <div id="menu" class="overlay menu">
+      <div class="menu-card">
+        <div class="cart-label">8-BIT RUNNER SERIES</div>
+        <h1>PIXEL DASH DX</h1>
+        <p class="subtitle">Choose a world. Hit start. Crash beautifully.</p>
+
+        <label class="stage-picker">
+          STAGE / WORLD
+          <select id="stageSelect">
+            <option value="0">1-1 Mushroom Rush</option>
+            <option value="1">2-1 Forest Quest</option>
+            <option value="2">3-1 Midnight Castle</option>
+            <option value="3">4-1 Jungle Blast</option>
+            <option value="4">5-1 Bubble Pop</option>
+            <option value="random">?-? Random Run</option>
+          </select>
+        </label>
+
+        <label class="stage-picker compact">
+          GAME MODE
+          <select id="modeSelect">
+            <option value="classic">Normal</option>
+            <option value="turbo">Turbo</option>
+            <option value="practice">Practice</option>
+          </select>
+        </label>
+
+        <div class="button-row">
+          <button id="startBtn">START</button>
+          <button id="musicBtn">MUSIC ON</button>
+          <button id="editorBtn">LEVEL EDITOR</button>
+        </div>
+
+        <p class="help">
+          Space / tap to jump · X sets checkpoint · Z deletes checkpoint · Practice buttons appear on mobile
+        </p>
+      </div>
+    </div>
+
+    <div id="pauseMenu" class="overlay hidden">
+      <div class="menu-card small">
+        <h2>PAUSED</h2>
+        <p class="subtitle">Escape returns to the menu. Resume keeps the run going.</p>
+        <div class="button-row">
+          <button id="resumeBtn">RESUME</button>
+          <button id="restartBtn">RESTART</button>
+          <button id="mainMenuBtn">MENU</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="deathMenu" class="overlay hidden">
+      <div class="menu-card small">
+        <h2>CRASH!</h2>
+        <p class="subtitle">Try again or pick another stage.</p>
+        <div class="button-row">
+          <button id="tryAgainBtn">TRY AGAIN</button>
+          <button id="deathMenuBtn">MENU</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="editorMenu" class="overlay hidden">
+      <div class="menu-card editor-card gd-editor-card">
+        <h2>LEVEL EDITOR</h2>
+        <p class="subtitle">Click the grid to place objects. Use the palette like a tiny GD-style editor.</p>
+
+        <div class="editor-top-row">
+          <label class="stage-picker compact">
+            EDIT STAGE
+            <select id="editorStageSelect">
+              <option value="0">1-1 Mushroom Rush</option>
+              <option value="1">2-1 Forest Quest</option>
+              <option value="2">3-1 Midnight Castle</option>
+              <option value="3">4-1 Jungle Blast</option>
+              <option value="4">5-1 Bubble Pop</option>
+            </select>
+          </label>
+
+          <label class="stage-picker compact">
+            TOOL
+            <select id="editorToolSelect">
+              <option value=".">Erase / Empty</option>
+              <option value="^">Spike</option>
+              <option value="#">Ground Block</option>
+              <option value="B">Air Block</option>
+              <option value="_">Pit</option>
+              <option value="o">Orb</option>
+              <option value="p">Pad</option>
+              <option value="g">Gravity Portal</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="editor-palette" id="editorPalette">
+          <button data-tool=".">EMPTY</button>
+          <button data-tool="^">SPIKE</button>
+          <button data-tool="#">GROUND BLOCK</button>
+          <button data-tool="B">AIR BLOCK</button>
+          <button data-tool="_">PIT</button>
+          <button data-tool="o">ORB</button>
+          <button data-tool="p">PAD</button>
+          <button data-tool="g">PORTAL</button>
+        </div>
+
+        <div class="editor-scroll-wrap">
+          <canvas id="editorCanvas" width="1800" height="220"></canvas>
+        </div>
+
+        <textarea id="levelText" spellcheck="false"></textarea>
+
+        <div class="button-row">
+          <button id="saveLevelBtn">SAVE</button>
+          <button id="testLevelBtn">TEST</button>
+          <button id="copyLevelsBtn">COPY LEVELS</button>
+          <button id="closeEditorBtn">MENU</button>
+        </div>
+
+        <p class="help">Editor tip: grid row 1 is air/orbs/portals, row 2 is blocks/spikes, row 3 is floor/pads/pits. You can still edit the raw text below.</p>
+      </div>
+    </div>
+
+    <div id="miniHud">
+      <span id="stageName">1-1 MUSHROOM RUSH</span>
+      <span id="distance">0%</span>
+      <span id="attempts">ATTEMPT 1</span>
+    </div>
+
+    <div id="practiceControls" class="hidden">
+      <button id="placeCheckpointBtn">SET CHECKPOINT</button>
+      <button id="deleteCheckpointBtn">DELETE CHECKPOINT</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
